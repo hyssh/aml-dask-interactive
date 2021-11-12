@@ -1,0 +1,19 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: 
+  local_path: source
+command: >-
+  python startDask.py
+  --output_folder ${{outputs.output_folder}}
+outputs:
+  output_folder:
+environment: 
+  image: mcr.microsoft.com/azureml/openmpi3.1.2-ubuntu18.04
+  conda_file: conda.yml
+compute: azureml:dask-inter-cpu-1
+resources:
+  instance_count: 4
+distribution:
+  type: pytorch
+display_name: dask-interative-cluster-run
+experiment_name: dask-interactive-cluster
+description: This sample shows how to run a distributed DASK cluster 
